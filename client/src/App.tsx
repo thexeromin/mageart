@@ -1,9 +1,13 @@
 import { ChakraProvider, Button } from '@chakra-ui/react'
 
+import Base from './components/Base'
+
 function App() {
     return (
         <ChakraProvider>
-            <Button>Hello</Button>
+            <Base>
+                <Button>Hello</Button>
+            </Base>
         </ChakraProvider>
     )
 }
