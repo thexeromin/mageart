@@ -20,6 +20,7 @@ const CanvasProvider = ({ children }: { children: ReactNode }) => {
                 canvas.width = image.width;
                 canvas.height = image.height;
                 // grayscale filter
+                ctx.drawImage(image, 0, 0);
                 ctx.filter = 'grayscale(1)';
                 ctx.drawImage(image, 0, 0);
             }
