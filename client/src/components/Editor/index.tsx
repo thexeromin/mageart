@@ -6,7 +6,7 @@ import { LeftToolbar, RightToolbar } from "./Toolbar"
 function Editor() {
     return (
         <Grid templateColumns="1fr 2fr 1fr" gap={4} p={4}>
-            <Box bg="tomato" minHeight="400px" display="flex" alignItems="center" justifyContent="center">
+            <Box minHeight="400px">
                 <LeftToolbar />
             </Box>
 
