@@ -1,4 +1,4 @@
-import { Button, Text } from "@chakra-ui/react"
+import { Button, Box, VStack } from "@chakra-ui/react"
 import { useCanvas } from "../../../context"
 
 function LeftToolbar() {
@@ -7,21 +7,24 @@ function LeftToolbar() {
         revertToOriginal
     } = useCanvas()
     return (
-        <>
-            <Text>Left Toolbar</Text>
-
-            <Button
-                onClick={() => applyGrayscaleFilter()}
+        <Box>
+            <VStack
+                spacing={2}
+                align='stretch'
             >
-                Apply Gray Scale
-            </Button>
+                <Button
+                    onClick={() => applyGrayscaleFilter()}
+                >
+                    Apply Gray Scale
+                </Button>
 
-            <Button
-                onClick={() => revertToOriginal()}
-            >
-                Revert Changes
-            </Button>
-        </>
+                <Button
+                    onClick={() => revertToOriginal()}
+                >
+                    Revert Changes
+                </Button>
+            </VStack>
+        </Box>
     )
 }
 

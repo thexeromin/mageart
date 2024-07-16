@@ -14,7 +14,7 @@ function Editor() {
                 <ImageContainer />
             </Box>
 
-            <Box bg="green.500" minHeight="400px" display="flex" alignItems="center" justifyContent="center">
+            <Box minHeight="400px">
                 <RightToolbar />
             </Box>
         </Grid>

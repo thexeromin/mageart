@@ -1,10 +1,19 @@
-import { Text } from "@chakra-ui/react"
+import { Button, Box, VStack } from "@chakra-ui/react"
 
 function RightToolbar() {
     return (
-        <>
-            <Text>Right Toolbar</Text>
-        </>
+        <Box>
+            <VStack
+                spacing={2}
+                align='stretch'
+            >
+                <Button
+                    onClick={() => null}
+                >
+                    Download
+                </Button>
+            </VStack>
+        </Box>
     )
 }
 
