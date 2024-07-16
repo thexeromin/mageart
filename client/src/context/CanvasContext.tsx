@@ -5,7 +5,9 @@ interface CanvasContextState {
     drawImage: (image: HTMLImageElement) => void;
     clearCanvas: () => void;
     applyGrayscaleFilter: () => void;
+    applySepiaFilter: () => void;
     revertToOriginal: () => void;
+    downloadImage: () => void
 }
 
 const CanvasContext = createContext<CanvasContextState | undefined>(undefined);
@@ -63,6 +65,33 @@ const CanvasProvider = ({ children }: { children: ReactNode }) => {
         }
     }
 
+    const applySepiaFilter = () => {
+        const canvas = canvasRef.current;
+        if (canvas) {
+            const ctx = canvas.getContext('2d')
+            const imageData = ctx!.getImageData(0, 0, canvas.width, canvas.height)
+            const data = imageData!.data
+            if (!data?.length) return
+
+            // loop through each pixel and apply filter
+            for (let i = 0; i < data?.length; i += 4) {
+                const red = data[i];
+                const green = data[i + 1]
+                const blue = data[i + 2]
+
+                // output red
+                data[i] = Math.min((red * .393) + (green *.769) + (blue * .189), 255.0)
+                // output green
+                data[i + 1] = Math.min((red * .349) + (green *.686) + (blue * .168), 255.0)
+                // output blue
+                data[i + 2] = Math.min((red * .272) + (green *.534) + (blue * .131), 255.0)
+            }
+
+            ctx!.putImageData(imageData, 0, 0)
+        }
+    }
+
+
     const clearCanvas = () => {
         const canvas = canvasRef.current;
         if (canvas) {
@@ -73,8 +102,24 @@ const CanvasProvider = ({ children }: { children: ReactNode }) => {
         }
     };
 
+    const downloadImage = () => {
+        const canvas = canvasRef.current;
+        if (canvas) {
+            const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+            window.location.href = image; 
+        }
+    };
+
     return (
-        <CanvasContext.Provider value={{ canvasRef, drawImage, clearCanvas, applyGrayscaleFilter, revertToOriginal }}>
+        <CanvasContext.Provider value={{ 
+            canvasRef,
+            drawImage,
+            clearCanvas,
+            applyGrayscaleFilter,
+            revertToOriginal,
+            applySepiaFilter,
+            downloadImage
+        }}>
             {children}
         </CanvasContext.Provider>
     );

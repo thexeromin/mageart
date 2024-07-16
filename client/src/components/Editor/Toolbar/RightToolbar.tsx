@@ -1,6 +1,10 @@
 import { Button, Box, VStack } from "@chakra-ui/react"
+import { useCanvas } from "../../../context"
 
 function RightToolbar() {
+    const { 
+        downloadImage
+    } = useCanvas()
     return (
         <Box>
             <VStack
@@ -8,7 +12,7 @@ function RightToolbar() {
                 align='stretch'
             >
                 <Button
-                    onClick={() => null}
+                    onClick={() => downloadImage()}
                 >
                     Download
                 </Button>

@@ -10,7 +10,7 @@ function Editor() {
                 <LeftToolbar />
             </Box>
 
-            <Box minHeight="400px" display="flex" alignItems="center" justifyContent="center">
+            <Box minHeight="400px" display="flex" justifyContent="center">
                 <ImageContainer />
             </Box>
 

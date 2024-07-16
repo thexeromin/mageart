@@ -4,7 +4,8 @@ import { useCanvas } from "../../../context"
 function LeftToolbar() {
     const { 
         applyGrayscaleFilter,
-        revertToOriginal
+        applySepiaFilter,
+        revertToOriginal,
     } = useCanvas()
     return (
         <Box>
@@ -15,13 +16,19 @@ function LeftToolbar() {
                 <Button
                     onClick={() => applyGrayscaleFilter()}
                 >
-                    Apply Gray Scale
+                    Apply gray scale
+                </Button>
+
+                <Button
+                    onClick={() => applySepiaFilter()}
+                >
+                    Apply sepia tone
                 </Button>
 
                 <Button
                     onClick={() => revertToOriginal()}
                 >
-                    Revert Changes
+                    Revert changes
                 </Button>
             </VStack>
         </Box>
