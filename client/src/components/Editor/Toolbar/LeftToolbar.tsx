@@ -5,6 +5,7 @@ function LeftToolbar() {
     const { 
         applyGrayscaleFilter,
         applySepiaFilter,
+        applyInvertFilter,
         revertToOriginal,
     } = useCanvas()
     return (
@@ -23,6 +24,12 @@ function LeftToolbar() {
                     onClick={() => applySepiaFilter()}
                 >
                     Apply sepia tone
+                </Button>
+
+                <Button
+                    onClick={() => applyInvertFilter()}
+                >
+                    Apply invert filter
                 </Button>
 
                 <Button

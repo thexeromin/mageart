@@ -6,6 +6,7 @@ interface CanvasContextState {
     clearCanvas: () => void;
     applyGrayscaleFilter: () => void;
     applySepiaFilter: () => void;
+    applyInvertFilter: () => void;
     revertToOriginal: () => void;
     downloadImage: () => void
 }
@@ -91,6 +92,28 @@ const CanvasProvider = ({ children }: { children: ReactNode }) => {
         }
     }
 
+    const applyInvertFilter = () => {
+        const canvas = canvasRef.current;
+        if (canvas) {
+            const ctx = canvas.getContext('2d')
+            const imageData = ctx!.getImageData(0, 0, canvas.width, canvas.height)
+            const data = imageData!.data
+            if (!data?.length) return
+
+            // loop through each pixel and apply filter
+            for (let i = 0; i < data?.length; i += 4) {
+                // output red
+                data[i] = 255 - data[i]
+                // output green
+                data[i + 1] = 255 - data[i + 1]
+                // output blue
+                data[i + 2] = 255 - data[i + 2]
+            }
+
+            ctx!.putImageData(imageData, 0, 0)
+        }
+    }
+
 
     const clearCanvas = () => {
         const canvas = canvasRef.current;
@@ -118,6 +141,7 @@ const CanvasProvider = ({ children }: { children: ReactNode }) => {
             applyGrayscaleFilter,
             revertToOriginal,
             applySepiaFilter,
+            applyInvertFilter,
             downloadImage
         }}>
             {children}
