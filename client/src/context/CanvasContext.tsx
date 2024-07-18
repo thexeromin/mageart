@@ -8,7 +8,8 @@ interface CanvasContextState {
     applySepiaFilter: () => void;
     applyInvertFilter: () => void;
     revertToOriginal: () => void;
-    downloadImage: () => void
+    downloadImage: () => void;
+    resizeImage: (width: number, height: number) => void;
 }
 
 const CanvasContext = createContext<CanvasContextState | undefined>(undefined);
@@ -31,6 +32,19 @@ const CanvasProvider = ({ children }: { children: ReactNode }) => {
             }
         }
     };
+
+    const resizeImage = (width: number, height: number) => {
+        const canvas = canvasRef.current;
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            if (ctx) {
+                const imageData = ctx!.getImageData(0, 0, canvas.width, canvas.height)
+                canvas.width = width;
+                canvas.height = height;
+                ctx?.putImageData(imageData, 0, 0)
+            }
+        }
+    }
 
     const revertToOriginal = () => {
         const canvas = canvasRef.current;
@@ -142,7 +156,8 @@ const CanvasProvider = ({ children }: { children: ReactNode }) => {
             revertToOriginal,
             applySepiaFilter,
             applyInvertFilter,
-            downloadImage
+            downloadImage,
+            resizeImage
         }}>
             {children}
         </CanvasContext.Provider>

@@ -1,5 +1,6 @@
 import { Button, Box, VStack } from "@chakra-ui/react"
 import { useCanvas } from "../../../context"
+import ResizeForm from "./ResizeForm"
 
 function LeftToolbar() {
     const { 
@@ -14,6 +15,10 @@ function LeftToolbar() {
                 spacing={2}
                 align='stretch'
             >
+                <ResizeForm
+                    width={100}
+                    height={100}
+                />
                 <Button
                     onClick={() => applyGrayscaleFilter()}
                 >
